@@ -1,6 +1,6 @@
 <template>
   <div class="home" style="text-align: left;">
-    <img v-bind:src="currentPost.image" alt="no image" style="float: right;">
+    <img v-bind:src="currentPost.image" alt="no image available" style="float: right;">
     <p style="font-weight: bold;">Title: {{ currentPost.title }}</p>
     <p>Body: {{ currentPost.body }}</p>
     <br>
