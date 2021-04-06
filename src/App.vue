@@ -3,10 +3,12 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/Sample">Sample</router-link> |
-      <router-link to="/Signup">Signup</router-link> |
-      <router-link to="/Login">Login</router-link> |
-      <router-link to="/Logout">Logout</router-link>
+      <router-link to="/sample">Sample</router-link> |
+      <router-link to="/signup">Signup</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/logout">Logout</router-link> |
+      <router-link to="/posts">Posts</router-link> |
+      <router-link to="/posts/new">Make New Post</router-link>
     </div>
     <router-view/>
   </div>
