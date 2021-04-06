@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <p style="color: red;">{{ error }}</p>
     <br>
     <hr>
     <div v-for="post in posts">
@@ -19,7 +20,8 @@ export default {
   data: function() {
     return {
       message: "Posts",
-      posts: []
+      posts: [],
+      error: ""
     };
   },
   created: function() {
@@ -33,6 +35,9 @@ export default {
         .then(response => {
           console.log(response.data);
           this.posts = response.data;
+        })
+        .catch(error => {
+          this.error = error.response.statusText;
         });
     }
   }

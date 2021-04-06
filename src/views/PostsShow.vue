@@ -1,11 +1,13 @@
 <template>
-  <div class="home">
-    <p>ID: {{ currentPost.id }}</p>
-    <p>Title: {{ currentPost.title }}</p>
+  <div class="home" style="text-align: left;">
+    <img v-bind:src="currentPost.image" alt="no image" style="float: right;">
+    <p style="font-weight: bold;">Title: {{ currentPost.title }}</p>
     <p>Body: {{ currentPost.body }}</p>
-    <img v-bind:src="currentPost.image" alt="no image">
     <br>
+    <p style="margin-bottom: 40px;" >Post ID: {{ currentPost.id }}</p>
     <router-link style="text-align: left" to="/posts"> < - - back to posts </router-link>
+    <router-link style="text-align: left; margin-left: 40px;" v-bind:to="`/posts/${this.$route.params.id}/edit`"> Edit </router-link>
+    <button v-on:click="postsDestroy" style="margin-left: 40px;">Delete</button>
   </div>
 </template>
 
@@ -29,7 +31,22 @@ export default {
         .get(`/api/posts/${this.$route.params.id}`)
         .then(response => {
           this.currentPost = response.data
+        })
+        .catch(error => {
+          console.log(error);
         });
+    },
+    postsDestroy: function() {
+      console.log("destroying...");
+      axios
+        .delete("/api/posts/" + this.$route.params.id)
+        .then(response => {
+          console.log("deleted")
+          this.$router.push("/posts")
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
   }
 };
