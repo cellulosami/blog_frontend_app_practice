@@ -1,11 +1,26 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    <p>User ID: <input v-model="userId"></p>
-    <p>Title: <input v-model="title"></p> 
-    <p>Body: <input v-model="body"></p>
-    <p>Image: <input v-model="image"></p>
-    <button v-on:click="postsCreate">Post</button>
+    <form v-on:submit.prevent="postsCreate">
+      <h1>{{ message }}</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors" v-bind:key="error">
+            {{ error }}
+        </li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label>
+        <input class="form-control" v-model="title">
+      </div>
+      <div class="form-group">
+        <label>Body:</label>
+        <input class="form-control" v-model="body">
+      </div>
+      <div class="form-group">
+        <label>Image:</label>
+        <input class="form-control" v-model="image">
+      </div>
+      <input type="submit" class="btn btn-primary" value="Create">
+    </form>
   </div>
 </template>
 
@@ -18,10 +33,10 @@ export default {
   data: function() {
     return {
       message: "Make a new post",
-      userId: "",
       title: "",
       body: "",
-      image: ""
+      image: "",
+      errors: []
     };
   },
   created: function() {},
@@ -32,12 +47,15 @@ export default {
         title: this.title,
         body: this.body,
         image: this.image,
-        user_id: this.user_id
       }
       axios
         .post("/api/posts", params)
         .then(response => {
           console.log("created")
+
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
         });
     }
   }
