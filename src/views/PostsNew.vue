@@ -2,11 +2,7 @@
   <div class="home">
     <form v-on:submit.prevent="postsCreate">
       <h1>{{ message }}</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-            {{ error }}
-        </li>
-      </ul>
+      <p class="text-danger">{{ errors }}</p>
       <div class="form-group">
         <label>Title:</label>
         <input class="form-control" v-model="title">
@@ -36,7 +32,7 @@ export default {
       title: "",
       body: "",
       image: "",
-      errors: []
+      errors: ""
     };
   },
   created: function() {},
@@ -52,10 +48,11 @@ export default {
         .post("/api/posts", params)
         .then(response => {
           console.log("created")
-
+          this.$router.push("/posts")
         })
         .catch(error => {
-          this.errors = error.response.data.errors;
+          console.log(error.response.statusText);
+          this.errors = error.response.statusText;
         });
     }
   }
