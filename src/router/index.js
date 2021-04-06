@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import PostsShow from '../views/PostsShow.vue'
+import PostsNew from '../views/PostsNew.vue'
 
 Vue.use(VueRouter)
 
@@ -46,8 +48,13 @@ const routes = [
   {
     path: '/posts/new',
     name: 'Posts New',
-    component: () => import('../views/PostsNew.vue')
-  }
+    component: PostsNew
+  },
+  {
+    path: '/posts/:id',
+    name: 'Posts Show',
+    component: PostsShow
+  },
 ]
 
 const router = new VueRouter({

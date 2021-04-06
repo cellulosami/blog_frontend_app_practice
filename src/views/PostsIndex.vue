@@ -4,8 +4,7 @@
     <br>
     <hr>
     <div v-for="post in posts">
-      <p>{{ post.title }}</p>
-      <p>{{ post }}</p>
+      <router-link v-bind:to="`/posts/${post.id}`">{{ post.title }}</router-link>
       <hr>
     </div>
   </div>
