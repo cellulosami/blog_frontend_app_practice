@@ -10,6 +10,10 @@
       <div class="form-group">
         <label>Body:</label>
         <input class="form-control" v-model="body">
+        <br />
+        <small v-if="body.length === 0">Body cannot be blank</small>
+        <small v-if="body.length > 0 && body.length < 256">{{ 255 - body.length }} characters remaining</small>
+        <small v-if="body.length >= 256" style="color: red;">Character limit exceeded</small>
       </div>
       <div class="form-group">
         <label>Image:</label>
