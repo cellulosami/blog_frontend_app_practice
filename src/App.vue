@@ -8,7 +8,7 @@
       <router-link to="/logout" v-if="loggedIn()">Logout</router-link> |
       <router-link to="/posts">Posts</router-link> |
       <router-link to="/posts/new">Make New Post</router-link> |
-      <button v-on:click="loggedIn">log check</button>
+      <button v-on:click="getUserId">user check</button>
     </div>
     <router-view/>
   </div>
@@ -49,6 +49,10 @@ export default {
         // console.log("false");
         return false;
       }
+    },
+    getUserId: function () {
+      console.log(localStorage.getItem("userId"));
+      return localStorage.getItem("userId");
     }
   }
 }

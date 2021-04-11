@@ -6,8 +6,10 @@
     <br>
     <p style="margin-bottom: 40px;" >Post ID: {{ currentPost.id }}</p>
     <router-link style="text-align: left" to="/posts"> < - - back to posts </router-link>
-    <router-link style="text-align: left; margin-left: 40px;" v-bind:to="`/posts/${this.$route.params.id}/edit`"> Edit </router-link>
-    <button v-on:click="postsDestroy" style="margin-left: 40px;">Delete</button>
+    <router-link style="text-align: left; margin-left: 40px;" v-bind:to="`/posts/${this.$route.params.id}/edit`" v-if="currentPost.user_id == $parent.getUserId()"> Edit </router-link>
+    <button v-on:click="postsDestroy" style="margin-left: 40px;" v-if="currentPost.user_id == $parent.getUserId()">Delete</button>
+     parent: {{ $parent.getUserId() }}
+    current: {{ currentPost.user_id }}
   </div>
 </template>
 
@@ -30,6 +32,7 @@ export default {
       axios
         .get(`/api/posts/${this.$route.params.id}`)
         .then(response => {
+          console.log(response.data);
           this.currentPost = response.data
         })
         .catch(error => {
