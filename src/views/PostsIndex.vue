@@ -1,10 +1,13 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <div>
+      <p>Search: <input v-model="search"></p>
+    </div>
     <p style="color: red;">{{ error }}</p>
     <br>
     <hr>
-    <div v-for="post in posts">
+    <div v-for="post in filterBy(posts, search, 'title')">
       <router-link v-bind:to="`/posts/${post.id}`">{{ post.title }}</router-link>
       <hr>
     </div>
@@ -15,13 +18,16 @@
 
 <script>
 import axios from 'axios';
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Posts",
       posts: [],
-      error: ""
+      error: "",
+      search: ""
     };
   },
   created: function() {

@@ -8,8 +8,6 @@
     <router-link style="text-align: left" to="/posts"> < - - back to posts </router-link>
     <router-link style="text-align: left; margin-left: 40px;" v-bind:to="`/posts/${this.$route.params.id}/edit`" v-if="currentPost.user_id == $parent.getUserId()"> Edit </router-link>
     <button v-on:click="postsDestroy" style="margin-left: 40px;" v-if="currentPost.user_id == $parent.getUserId()">Delete</button>
-     parent: {{ $parent.getUserId() }}
-    current: {{ currentPost.user_id }}
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Vue2Filters from 'vue2-filters'
 import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
@@ -11,6 +12,7 @@ if (jwt) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
 }
 
+Vue.use(Vue2Filters)
 Vue.config.productionTip = false;
 
 new Vue({
