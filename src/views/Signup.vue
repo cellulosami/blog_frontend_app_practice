@@ -17,11 +17,11 @@
       </div>
       <div class="form-group">
         <label>Password:</label>
-        <input type="password" class="form-control" v-model="password">
+        <input type="password" class="form-control" v-model="password" maxlength="20">
       </div>
       <div class="form-group">
         <label>Password confirmation:</label>
-        <input type="password" class="form-control" v-model="passwordConfirmation">
+        <input type="password" class="form-control" v-model="passwordConfirmation" maxlength="20">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
