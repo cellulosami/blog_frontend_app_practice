@@ -4,17 +4,36 @@
     <div>
       <p>Search: <input v-model="search"></p>
     </div>
+    <div>
+      <p>
+        Order by:
+        <button v-on:click="orderByTitle">
+          Title
+        </button>
+        <button v-on:click="orderById">
+          Id
+        </button>
+      </p>
+    </div>
     <p style="color: red;">{{ error }}</p>
     <br>
     <hr>
-    <div v-for="post in filterBy(posts, search, 'title')">
-      <router-link v-bind:to="`/posts/${post.id}`">{{ post.title }}</router-link>
+    <div v-for="post in orderBy(filterBy(posts, search, 'title', 'body'), order, direction)">
+      <p><router-link v-bind:to="`/posts/${post.id}`" id="post-link">{{ post.title }}</router-link>Id: {{ post.id }}</p>
       <hr>
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+button {
+  margin: 0% 1%;
+}
+
+#post-link {
+  margin-right: 3%;
+}
+</style>
 
 <script>
 import axios from 'axios';
@@ -27,7 +46,9 @@ export default {
       message: "Posts",
       posts: [],
       error: "",
-      search: ""
+      search: "",
+      order: "id",
+      direction : 1
     };
   },
   created: function() {
@@ -45,6 +66,24 @@ export default {
         .catch(error => {
           this.error = error.response.statusText;
         });
+    },
+    orderByTitle: function () {
+      console.log("title");
+      if (this.order !== "title") {
+        this.direction = 1;
+        this.order = "title";
+      } else {
+        this.direction *= -1;
+      }
+    },
+    orderById: function () {
+      console.log("id");
+      if (this.order !== "id") {
+        this.direction = 1;
+        this.order = "id";
+      } else {
+        this.direction *= -1;
+      }
     }
   }
 };
